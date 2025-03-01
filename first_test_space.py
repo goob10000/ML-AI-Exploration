@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import log_loss
 
 # df = pl.read_csv("ML-AI-Exploration\dataexport_20250301T010932.csv",skip_rows=9)
 # df.write_parquet("SFO_weather_data_2008to2025.parquet")
@@ -61,9 +62,23 @@ preds = tree.predict(dtest)
 
 mse = mean_squared_error(y_test, preds)
 mse
+loss = log_loss(y_test, preds)
+y_test
+preds
 
-
-
-plt.plot(preds[:500])
-plt.plot(y_test[:500])
+plt.scatter(np.arange(500),abs(preds[:500]-y_test[:500,0]),s=0.2)
 plt.show()
+
+abs(preds[:500]-y_test[:500,0])
+
+'''
+Next Steps:
+- Principal component analysis, look for redundant and not useful features
+    - Graph each variable against the others for chorrelation
+- Look at the tree!!
+    - Explainer!!
+- Entropy?
+
+
+
+'''
